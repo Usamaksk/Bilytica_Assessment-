@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class DatingPage extends StatefulWidget {
+  const DatingPage({super.key});
+
   @override
   _DatingPageState createState() => _DatingPageState();
 }
@@ -55,6 +57,7 @@ class _DatingPageState extends State<DatingPage> {
         'email': user['email'],
         'location': user['location']['city'],
         'picture': user['picture']['thumbnail'],
+        'result': user['result']
       })
           .toList();
 
@@ -115,17 +118,35 @@ class _DatingPageState extends State<DatingPage> {
                     child: Padding(
                       padding: const EdgeInsets.all(12.0),
                       child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          CircleAvatar(
-                            radius: 27,
-                            backgroundColor: Colors.deepPurpleAccent,
-                            backgroundImage: NetworkImage(item['picture']),
-                          ),
+                          const Icon(Icons.calendar_month,color: Colors.deepPurpleAccent,),
+                          Text("${item['results']}",style: const TextStyle(
+                            color: Colors.deepPurpleAccent
+                          ),),
                           const SizedBox(width: 10),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Row(
+                               mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  CircleAvatar(
+                                    radius: 30,
+                                    backgroundColor: Colors.deepPurpleAccent,
+                                    backgroundImage: NetworkImage(item['picture']),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        border: Border.all(color: Colors.deepPurpleAccent, width: 3),
+                                        shape: BoxShape.circle,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
                                    " ${item['name']} - ${ item['age']}",
@@ -134,15 +155,15 @@ class _DatingPageState extends State<DatingPage> {
                                       fontSize: 16,
                                     ),
                                   ),
-                                  SizedBox(width: screenWidth * 0.15,),
-                                  Icon(Icons.mark_unread_chat_alt_sharp,color: Colors.deepPurpleAccent,),
+                                  SizedBox(width: screenWidth * 0.14,),
+                                 const Icon(Icons.mark_unread_chat_alt_sharp,color: Colors.deepPurpleAccent,),
                                   SizedBox(width: screenWidth * 0.01,),
-                                  Icon(Icons.call,color: Colors.deepPurpleAccent,)
+                                 const Icon(Icons.call,color: Colors.deepPurpleAccent,)
 
                                 ],
                               ),
                               Text('Location: ${item['location']}'),
-                              Text('Email: ${item['email']}'),
+                              Text('Email: ${item['email']}',),
                             ],
                           ),
                         ],
@@ -194,7 +215,6 @@ class _DatingPageState extends State<DatingPage> {
 
   Widget _searchBar() {
     double screenWidth = MediaQuery.of(context).size.width;
-    double screenheight = MediaQuery.of(context).size.height;
 
     return Padding(
       padding: const EdgeInsets.all(10.0),

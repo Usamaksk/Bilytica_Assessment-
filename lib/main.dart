@@ -4,7 +4,7 @@ import 'Pages/datingPage/datingPage.dart';
 
 void main() => runApp(MaterialApp(
   debugShowCheckedModeBanner: false,
-  home:DatingPage(),
+  home: DatingPage(),
 ));
 
 
