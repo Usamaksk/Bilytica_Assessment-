@@ -90,6 +90,9 @@ class _DatingPageState extends State<DatingPage> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+        double screenheight = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: _appBar(),
       body: Column(
@@ -106,7 +109,7 @@ class _DatingPageState extends State<DatingPage> {
                 final item = _filteredData[index];
 
                 return SizedBox(
-                  height: 200,
+                  height: screenheight * 0.60,
                   child: Card(
                     margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                     child: Padding(
@@ -131,9 +134,9 @@ class _DatingPageState extends State<DatingPage> {
                                       fontSize: 16,
                                     ),
                                   ),
-                                  SizedBox(width: 80,),
+                                  SizedBox(width: screenWidth * 0.15,),
                                   Icon(Icons.mark_unread_chat_alt_sharp,color: Colors.deepPurpleAccent,),
-                                  SizedBox(width: 15,),
+                                  SizedBox(width: screenWidth * 0.01,),
                                   Icon(Icons.call,color: Colors.deepPurpleAccent,)
 
                                 ],
@@ -190,10 +193,13 @@ class _DatingPageState extends State<DatingPage> {
   }
 
   Widget _searchBar() {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenheight = MediaQuery.of(context).size.height;
+
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: SizedBox(
-        width: 360,
+        width: screenWidth * 3.6,
         child: TextField(
           autofocus: false,
           onChanged: _onSearch,
